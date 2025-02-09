@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {Routes,Route} from "react-router-dom"
 import Container from "./layout/container/container";
-import SignUP from "./veiw/SignUP";
+import LogIn from "./veiw/auth/LogIn";
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
         <div className="App">
             <Routes>
                 <Route element={<Container/>}>
-                    <Route path={"/"} element={<SignUP/>}/>
+                    <Route path={"/"} element={<LogIn/>}/>
                 </Route>
             </Routes>
         </div>

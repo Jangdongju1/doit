@@ -1,0 +1,16 @@
+#common-btn-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+
+    box-sizing: border-box;
+    padding: 3px;
+
+    border-radius: 5px;
+}
+#common-btn-wrapper:hover{
+    cursor: pointer;
+}

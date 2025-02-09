@@ -1,0 +1,37 @@
+#common-input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.common-input-container{
+    box-sizing: border-box;
+    padding: 3px;
+    border: 1px solid rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.common-input-label{
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    margin-left: 3px;
+    font-weight: 600;
+}
+.common-input-element{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+}
+.common-input-password-confirm-icon{
+    width: 24px;
+    height: 24px;
+}
+.common-input-error-message{
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+}

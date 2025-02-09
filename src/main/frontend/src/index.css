@@ -1,9 +1,12 @@
+
 body {
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* 화면을 벗어나는 내용 숨기기 */
   display: flex;
   justify-content: center;
+}
+div{
+  user-select: none;
 }
