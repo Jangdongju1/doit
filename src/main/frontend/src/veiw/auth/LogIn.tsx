@@ -1,6 +1,6 @@
 import "./style.css";
 import CommonInput from "../../component/input/CommonInput";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import CommonButton from "../../component/button/CommonButton";
 
 export default function LogIn() {
@@ -109,26 +109,15 @@ export default function LogIn() {
             setPasswordConfirmClick(prevState => !prevState);
         }
 
-        // eventHandler : // 유저아이디 변경 이벤트 처리
-        const onUserIdChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
+
+        // eventHandler : 각각의 인풋 변경 이벤트 처리
+        const onChangeEventHandler = (e: ChangeEvent<HTMLInputElement>,
+                                      setter:React.Dispatch<React.SetStateAction<string>>)=>{
             const value = e.target.value;
-            setUserId(value);
+            setter(value);
+
         }
-        // eventHandler : // 패스워드 변경 이벤트 처리
-        const onPasswordChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            const value = e.target.value;
-            setPassword(value);
-        }
-        // eventHandler : // 패스워드 확인 변경 이벤트 처리
-        const onPasswordConfirmChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            const value = e.target.value;
-            setPasswordConfirm(value);
-        }
-        // eventHandler : // 닉네임 변경 이벤트 처리
-        const onNicknameChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            const value = e.target.value;
-            setNickname(value);
-        }
+
 
         // eventHandler : //뒤로가기 버튼 클릭 이벤트 헨들러
         const onBackBtnClickEventHandler = () => {
@@ -145,7 +134,7 @@ export default function LogIn() {
                         <CommonInput label={"ID"}
                                      type={"text"}
                                      value={userId}
-                                     onChange={onUserIdChangeEventHandler}
+                                     onChange={(e)=>onChangeEventHandler(e, setUserId)}
                                      isError={error.idError}
                                      errorMessage={"아이디 중복."}
                                      placeholder={"ID"}/>
@@ -160,7 +149,7 @@ export default function LogIn() {
                         <CommonInput label={"PASSWORD"}
                                      type={passwordClick ? "text" : "password"}
                                      value={password}
-                                     onChange={onPasswordChangeEventHandler}
+                                     onChange={(e) => onChangeEventHandler(e, setPassword)}
                                      placeholder={"password"}
                                      icon={passwordClick ? "key-on-image" : "key-off-image"}
                                      onClick={onPassWordClickEventHandler}/>
@@ -168,7 +157,7 @@ export default function LogIn() {
                         <CommonInput label={"PASSWORD CONFIRM"}
                                      type={passwordConfirmClick ? "text" : "password"}
                                      value={passwordConfirm}
-                                     onChange={onPasswordConfirmChangeEventHandler}
+                                     onChange={(e)=> onChangeEventHandler(e, setPasswordConfirm)}
                                      placeholder={"Password 확인"}
                                      icon={passwordConfirmClick ? "key-on-image" : "key-off-image"}
                                      isError={error.passwordConfirmError}
@@ -178,7 +167,7 @@ export default function LogIn() {
                         <CommonInput label={"NICKNAME"}
                                      type={"text"}
                                      value={nickname}
-                                     onChange={onNicknameChangeEventHandler}
+                                     onChange={(e) => onChangeEventHandler(e, setNickname)}
                                      placeholder={"Nickname"}/>
                     </div>
 
