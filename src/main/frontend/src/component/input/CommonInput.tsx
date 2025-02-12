@@ -4,9 +4,10 @@ import React, {ChangeEvent} from "react";
 type CommonInputProps = {
     size?: { width: number, height: number }
     label?: string,
-    icon?: string
+    icon?: string,
     type: string,
-    placeholder?: string
+    placeholder?: string,
+    name? : string
     value: string,
     isError?: boolean,
     errorMessage?: string
@@ -19,6 +20,7 @@ export default function CommonInput(props: CommonInputProps) {
         label,
         type,
         placeholder,
+        name,
         icon,
         isError,
         errorMessage
@@ -49,13 +51,13 @@ export default function CommonInput(props: CommonInputProps) {
             }}>
                 <input className={"common-input-element"}
                        type={type}
+                       name={name? name : ""}
                        placeholder={placeholder ? placeholder : ""}
                        value={value}
                        onChange={onChange}/>
 
                 {icon && (<div className={`image common-input-password-confirm-icon ${icon}`}
-                               onClick={onClick ? onClick : () => {
-                               }}></div>)}
+                               onClick={onClick ? onClick : () => {}}></div>)}
             </div>
             {isError && errorMessage && (<span className={"common-input-error-message"}>{errorMessage}</span>)}
         </div>
