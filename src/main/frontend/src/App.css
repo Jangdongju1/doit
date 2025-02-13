@@ -14,6 +14,18 @@
 .arrow-left-icon{
     background-image: url("asset/arrow_left_icon.png");
 }
+.arrow-right-icon{
+    background-image: url("./asset/arrow_right_icon.png");
+}
+.calender-icon{
+    background-image: url("./asset/calender_icon.png");
+}
+.close-icon{
+    background-image: url("./asset/close_icon.png");
+}
+.memo-icon{
+    background-image: url("./asset/memo_icon.png");
+}
 .image{
     background-position: 50% 50%;
     background-size: 100% 100%;

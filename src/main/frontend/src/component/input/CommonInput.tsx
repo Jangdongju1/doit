@@ -23,12 +23,14 @@ export default function CommonInput(props: CommonInputProps) {
         name,
         icon,
         isError,
+
         errorMessage
     } = props
     const {value, onClick, onChange} = props;
 
     // default size : px 이라는 단위는 붙이지 않아도 자동으로 처리가 된다.
     const defaultSize = {width: 200, height: 32};
+
 
     const getSize = () => {
         return size ? size : defaultSize;

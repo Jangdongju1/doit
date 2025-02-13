@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {Routes,Route} from "react-router-dom"
-import Container from "./layout/container/container";
+import {Route, Routes} from "react-router-dom"
+import Container from "./layout/container/Container";
 import LogIn from "./veiw/auth/LogIn";
 import Main from "./veiw/main/Main";
 import {DEFAULT_PATH, MAIN_PATH} from "./constant/path";

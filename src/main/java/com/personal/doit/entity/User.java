@@ -17,12 +17,9 @@ public class User {
     private Integer user_sequence;
     // 사이즈에 대한 제한은 따로 안주는 것으로.
 
-    @NotNull @NotBlank
     @Column(name = "user_id")
     private String userId;
-    @NotNull @NotBlank
     private String password;
-    @NotNull @NotBlank
     private String nickname;
     private String role;
 

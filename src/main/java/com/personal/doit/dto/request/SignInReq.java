@@ -5,16 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class SignUpReq {
+@Setter
+public class SignInReq {
     @NotNull
     @NotBlank
     private String user_id;
     @NotNull
     @NotBlank
     private String password;
-    @NotNull
-    @NotBlank
-    private String nickname;
 }

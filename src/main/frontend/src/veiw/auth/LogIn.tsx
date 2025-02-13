@@ -10,6 +10,7 @@ import {ResponseCode} from "../../constant/enum/ResponseCode";
 import {useNavigate} from "react-router-dom";
 import {MAIN_PATH} from "../../constant/path";
 import {useCookies} from "react-cookie";
+import ReactQuill from "react-quill";
 
 export default function LogIn() {
 
@@ -18,7 +19,6 @@ export default function LogIn() {
     // state : card 상태  간단히 리터럴 값으로 구현
     const [cardState, setCardState] =
         useState<"sign-in" | "sign-up">("sign-in");
-
     const [cookies, setCookies] = useCookies(["accessToken"]);
 
 
@@ -179,7 +179,7 @@ export default function LogIn() {
 
             const {data} = response as SignUpRep;
 
-            alert(data.addedId + "님 반갑습니다.");
+            alert(data.addedId + "님 회원가입이 완료되었습니다.");
             setCardState("sign-in");
         }
 
@@ -219,7 +219,7 @@ export default function LogIn() {
         }
 
         const onDuplicationCheckBtnClickEventHandler = () => {
-            if (userId.length == 0) {
+            if (userId.length === 0) {
                 alert("아이디는 공백일 수 없음.");
                 return;
             }
@@ -235,6 +235,7 @@ export default function LogIn() {
 
             const isIdError = userId.length === 0;
             const isPassError = password.length === 0;
+            const isNickNameError = nickname.length === 0;
 
 
             if (isIdError) {
@@ -242,10 +243,13 @@ export default function LogIn() {
                 return;
             }
             if (isPassError) {
-                alert("비밀번호는 공백일 수 없음");
+                alert("비밀번호는 공백일 수 없음.");
                 return;
             }
-
+            if (isNickNameError){
+                alert("닉네임은 공백일 수 없음.")
+                return;
+            }
             if (!isChecked) {
                 alert("아이디 중복 체크 바람.");
                 return;
@@ -331,8 +335,8 @@ export default function LogIn() {
         <div id={'log-in-wrapper'}>
             <div className={"log-in-container"}>
                 <div className={"image log-in-app-logo main-logo "}/>
-                {cardState == "sign-in" ? <SignInCard/> : <SignUPCard/>}
-
+                {cardState === "sign-in" ? <SignInCard/> : <SignUPCard/>}
+                
             </div>
 
 

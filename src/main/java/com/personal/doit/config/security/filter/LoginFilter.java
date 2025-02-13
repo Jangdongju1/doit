@@ -5,7 +5,7 @@ import com.personal.doit.common.ResponseCode;
 import com.personal.doit.common.ResponseMessage;
 import com.personal.doit.common.global.GlobalVariable;
 import com.personal.doit.dto.ApiResponse;
-import com.personal.doit.dto.request.LoginReq;
+import com.personal.doit.dto.request.SignInReq;
 import com.personal.doit.dto.response.SignInRep;
 import com.personal.doit.jwt.WebTokenService;
 import com.personal.doit.util.Utils;
@@ -53,7 +53,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 builder.append(line);
             }
 
-            LoginReq req = new Gson().fromJson(builder.toString(), LoginReq.class);
+            SignInReq req = new Gson().fromJson(builder.toString(), SignInReq.class);
 
             authRequest = new UsernamePasswordAuthenticationToken(req.getUser_id(), req.getPassword());
 
