@@ -20,9 +20,19 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
-    public static ResponseEntity<ResponseDto> isExistId(){
+    public static ResponseEntity<ResponseDto> isExistId() {
         ResponseDto response = new ResponseDto(ResponseCode.EXIST_ID, ResponseMessage.EXIST_ID);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
+    public static ResponseEntity<ResponseDto> notExistUser() {
+        ResponseDto response = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+    public static ResponseEntity<ResponseDto> notExistSchedule(){
+        ResponseDto response = new ResponseDto(ResponseCode.NOT_EXIST_SCHEDULE, ResponseMessage.NOT_EXIST_SCHEDULE);
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 }

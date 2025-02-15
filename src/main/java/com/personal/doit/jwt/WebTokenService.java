@@ -1,6 +1,6 @@
 package com.personal.doit.jwt;
 
-import org.springframework.beans.factory.annotation.Value;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface WebTokenService {
 
@@ -8,5 +8,11 @@ public interface WebTokenService {
 
     public String createWebToken(String userId, String role, int expireTimeSec);
 
-    public String getSub(String token);
+    public String parseToken(HttpServletRequest request);
+
+    public boolean isExpired(String token);
+
+    public String getUsername(String token);
+
+    public String getRole(String token);
 }

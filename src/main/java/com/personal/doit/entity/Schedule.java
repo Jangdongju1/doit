@@ -12,30 +12,39 @@ import lombok.NoArgsConstructor;
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer schedule_sequence;
-    private String schedule_title;
-    private String schedule_content;
+    @Column(name = "schedule_sequence")
+    private Integer sequence;
+    @Column(name = "schedule_title")
+    private String title;
+    @Column(name = "schedule_content")
+    private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule_writer", referencedColumnName = "user_sequence")
-    private User schedule_writer;
-    private Integer schedule_year;
-    private Integer schedule_month;
-    private Integer schedule_day;
-    private String schedule_time;
-    private String schedule_reg_date;
-
+    private User writer;
+    @Column(name = "schedule_year")
+    private Integer year;
+    @Column(name = "schedule_month")
+    private Integer month;
+    @Column(name = "schedule_day")
+    private Integer day;
+    @Column(name = "schedule_start")
+    private String start;
+    @Column(name = "schedule_end")
+    private String end;
+    @Column(name = "schedule_reg_date")
+    private String regDate;
 
     @Builder
-    public Schedule(String schedule_title, String schedule_content, User schedule_writer, Integer schedule_year, Integer schedule_month, Integer schedule_day, String schedule_time, String schedule_reg_date) {
-        this.schedule_title = schedule_title;
-        this.schedule_content = schedule_content;
-        this.schedule_writer = schedule_writer;
-        this.schedule_year = schedule_year;
-        this.schedule_month = schedule_month;
-        this.schedule_day = schedule_day;
-        this.schedule_time = schedule_time;
-        this.schedule_reg_date = schedule_reg_date;
+    public Schedule(String title, String content, User writer, Integer year, Integer month, Integer day, String start, String end, String regDate) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.start = start;
+        this.end = end;
+        this.regDate = regDate;
     }
-
-
 }

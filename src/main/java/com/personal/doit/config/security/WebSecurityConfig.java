@@ -2,6 +2,7 @@ package com.personal.doit.config.security;
 
 import com.personal.doit.common.global.GlobalVariable;
 import com.personal.doit.config.security.entrypoint.FailedAuthenticationEntryPoint;
+import com.personal.doit.config.security.filter.JwtFilter;
 import com.personal.doit.config.security.filter.LoginFilter;
 import com.personal.doit.jwt.WebTokenService;
 import com.personal.doit.util.Utils;
@@ -72,12 +73,14 @@ public class WebSecurityConfig {
             // 인증이 필요한 url 설정
             http.authorizeHttpRequests(authorizationRequests ->
                     authorizationRequests
-                            .requestMatchers(HttpMethod.POST, "api/v1/user/**").permitAll()
+                            .requestMatchers("/api/v1/user/**").permitAll()
                             .anyRequest().authenticated());
 
             // 인증 실패시 핸들러 등록
             http.exceptionHandling(handler -> handler.authenticationEntryPoint(new FailedAuthenticationEntryPoint()));
 
+
+            http.addFilterBefore(new JwtFilter(webTokenService),LoginFilter.class);
 
             // 커스텀 로그인 필터 추가
             UsernamePasswordAuthenticationFilter loginFilter =

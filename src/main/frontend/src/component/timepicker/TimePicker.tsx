@@ -2,7 +2,16 @@ import "./style.css"
 import React, {useEffect, useState} from "react";
 import useTimePicker from "../../hook/TimePicker";
 
-export default function TimePicker() {
+type TimePickerProps = {
+    setStart : React.Dispatch<React.SetStateAction<string>>,
+    setEnd : React.Dispatch<React.SetStateAction<string>>,
+    defaultStart? : string,
+    defaultEnd? : string,
+}
+
+export default function TimePicker(props : TimePickerProps) {
+
+    const {setStart,setEnd,defaultStart,defaultEnd} = props;
 
     // custom hook : 타임피커 시간 배열
     const {
@@ -14,7 +23,6 @@ export default function TimePicker() {
         endOptions
     } = useTimePicker();
 
-    // const [isRender, setIsRender] = useState<boolean>(false);
 
 
     // state : 타임피커 start data 상태
@@ -45,7 +53,17 @@ export default function TimePicker() {
         onClick: (value: string) => void
     }
 
+    useEffect(() => {
+        setStart(startTime)
+        setEnd(endTime)
+    }, [startTime, endTime]);
 
+    useEffect(() => {
+        if (defaultStart && defaultEnd){
+            setStartTime(defaultStart);
+            setEndTime(defaultEnd)
+        }
+    }, [defaultStart, defaultEnd]);
     const PickerOption = (props: OptionProps) => {
         const {options, onClick} = props;
         return (
@@ -58,10 +76,6 @@ export default function TimePicker() {
         )
     }
 
-    //
-    // useEffect(() => {
-    //     setIsRender(true);
-    // }, [startOptions]);
     return (
         <div id={"time-picker-wrapper"}>
             <div className={"time-picker-container"}

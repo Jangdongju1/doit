@@ -26,6 +26,12 @@
 .memo-icon{
     background-image: url("./asset/memo_icon.png");
 }
+.delete-icon{
+    background-image: url("./asset/delete_icon.png");
+}
+.edit-icon{
+    background-image: url("./asset/edit_icon.png");
+}
 .image{
     background-position: 50% 50%;
     background-size: 100% 100%;

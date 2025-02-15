@@ -4,5 +4,6 @@ export default  interface SignInRsp extends ResponseDto{
     data : {
         token: string,
         expiration : number
+        userId : string
     }
 }

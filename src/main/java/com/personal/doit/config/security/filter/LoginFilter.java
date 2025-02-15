@@ -95,7 +95,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         ApiResponse<SignInRep> responseBody = new ApiResponse<>(
                 ResponseCode.SUCCESS,
                 ResponseMessage.SUCCESS,
-                new SignInRep(token,TOKEN_EXPIRE_TIME));
+                new SignInRep(token,TOKEN_EXPIRE_TIME, details.getUsername()));
 
         // 반환타입 및 http 상태 세팅 인코딩
         response.setContentType("application/json");

@@ -45,8 +45,8 @@ export default function LogIn() {
             const {data} = response as SignInRsp;
             const {token, expiration} = data;
 
-
-
+            const encodedId = btoa(data.userId);
+            sessionStorage.setItem("userSession", encodedId);
             // 쿠키 유효시간 설정의 단위는 밀리초
             setCookies("accessToken", token, {path: "/", expires: new Date(Date.now() + expiration * 1000)});
 
@@ -179,6 +179,8 @@ export default function LogIn() {
 
             const {data} = response as SignUpRep;
 
+            const encodedId  = btoa(data.addedId);
+            sessionStorage.setItem("userSession", encodedId);
             alert(data.addedId + "님 회원가입이 완료되었습니다.");
             setCardState("sign-in");
         }
