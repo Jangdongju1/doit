@@ -7,4 +7,5 @@ public interface ResponseMessage {
     String LOGIN_FAIL = "login info is mismatched!!";
     String NOT_EXIST_USER = "user does not exist!!";
     String NOT_EXIST_SCHEDULE = "schedule does not exist!!";
+    String AUTHENTICATION_FAIL = "authentication failed!!";
 }

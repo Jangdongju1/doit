@@ -5,7 +5,6 @@ import com.personal.doit.common.ResponseMessage;
 import com.personal.doit.dto.ApiResponse;
 import com.personal.doit.dto.ResponseDto;
 import com.personal.doit.dto.custom.ScheduleDto;
-import com.personal.doit.entity.Schedule;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

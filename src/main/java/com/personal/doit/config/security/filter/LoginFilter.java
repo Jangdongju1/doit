@@ -6,7 +6,7 @@ import com.personal.doit.common.ResponseMessage;
 import com.personal.doit.common.global.GlobalVariable;
 import com.personal.doit.dto.ApiResponse;
 import com.personal.doit.dto.request.SignInReq;
-import com.personal.doit.dto.response.SignInRep;
+import com.personal.doit.dto.response.SignInRsp;
 import com.personal.doit.jwt.WebTokenService;
 import com.personal.doit.util.Utils;
 import jakarta.servlet.FilterChain;
@@ -92,10 +92,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 //
 //        response.setHeader("Set-Cookie", builder.toString());
 //
-        ApiResponse<SignInRep> responseBody = new ApiResponse<>(
+        ApiResponse<SignInRsp> responseBody = new ApiResponse<>(
                 ResponseCode.SUCCESS,
                 ResponseMessage.SUCCESS,
-                new SignInRep(token,TOKEN_EXPIRE_TIME, details.getUsername()));
+                new SignInRsp(token,TOKEN_EXPIRE_TIME, details.getUsername()));
 
         // 반환타입 및 http 상태 세팅 인코딩
         response.setContentType("application/json");
@@ -108,7 +108,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     //실패시
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        ApiResponse<SignInRep> responseBody = new ApiResponse<>(
+        ApiResponse<SignInRsp> responseBody = new ApiResponse<>(
                 ResponseCode.LOGIN_FAIL,
                 ResponseMessage.LOGIN_FAIL,
                 null

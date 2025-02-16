@@ -8,4 +8,5 @@ public interface ResponseCode {
     String LOGIN_FAIL = "LF";
     String NOT_EXIST_USER = "NEU";
     String NOT_EXIST_SCHEDULE = "NES";
+    String AUTHENTICATION_FAIL = "FA";
 }

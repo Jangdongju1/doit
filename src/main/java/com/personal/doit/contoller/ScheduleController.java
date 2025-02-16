@@ -19,7 +19,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("")
-    public ResponseEntity<? super ApiResponse<ScheduleRegRsp>> poseSchedule(
+    public ResponseEntity<? super ApiResponse<ScheduleRegRsp>> postSchedule(
             @AuthenticationPrincipal CustomUserDetails details,
             @Validated @RequestBody ScheduleRegReq req) {
 
@@ -29,8 +29,8 @@ public class ScheduleController {
     @GetMapping("/schedule-list")
     public ResponseEntity<? super ApiResponse<ScheduleListRsp>> getScheduleList(
             @AuthenticationPrincipal CustomUserDetails details,
-            @RequestParam("year") Integer year,
-            @RequestParam("month") Integer month) {
+            @RequestParam(value = "year",required = true) Integer year,
+            @RequestParam(value = "month", required = true) Integer month) {
 
         return scheduleService.getScheduleList(details, year, month);
     }
@@ -55,7 +55,7 @@ public class ScheduleController {
     @DeleteMapping
     public ResponseEntity<? super ApiResponse<DeleteScheduleRsp>> deleteSchedule(
             @AuthenticationPrincipal CustomUserDetails details,
-            @RequestParam("sequence") Integer sequence){
+            @RequestParam(value = "sequence", required = true) Integer sequence){
         return scheduleService.deleteSchedule(details,sequence);
     }
 }
