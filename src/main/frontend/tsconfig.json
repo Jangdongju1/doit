@@ -18,7 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["src/*"]  // src 폴더 내 모든 파일을 절대 경로로 임포트 가능
+    }
   },
   "include": [
     "src"
