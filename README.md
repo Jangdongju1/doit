@@ -86,9 +86,9 @@
 
 ### - 화면소개
 * 회원가입 및 로그인
+
   <div>
       ![signup](https://github.com/user-attachments/assets/69c4a7e3-1e27-4c11-9f02-aed128751cde)
-      ![login](https://github.com/user-attachments/assets/bdfa0456-0118-45f7-8caf-ec61a08c4519)
   </div>
 
 
