@@ -20,7 +20,7 @@
     * FrontEnd
               <div>
                   <img src="https://img.shields.io/badge/React.js-61DAFB?style=float-square&logo=React&logoColor=white"/><img src="https://img.shields.io/badge/18-515151?style=float-square">,
-                  <img src="https://img.shields.io/badge/Axios-5A29E4?style=float-square&logo=Axios&logoColor=white"/><img src="https://img.shields.io/badge/1.6.8-515151?style=float-square">,
+                  <img src="https://img.shields.io/badge/Axios-5A29E4?style=float-square&logo=Axios&logoColor=white"/><img src="https://img.shields.io/badge/1.7.9-515151?style=float-square">,
               </div>
 
     * BackEnd
