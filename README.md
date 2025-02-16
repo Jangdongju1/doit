@@ -97,7 +97,7 @@
       ![write](https://github.com/user-attachments/assets/51da171b-5b34-42de-a1f6-bdf7c9b4445a)
 
 
-* 일정확인
+* 일정 확인 & 수정 & 삭제 
       ![schedule](https://github.com/user-attachments/assets/0d8d115c-959b-4021-8cc1-a742f2fa9b86)
 
 
