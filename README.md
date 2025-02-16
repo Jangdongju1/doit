@@ -49,7 +49,7 @@
 ------------
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/30cc72bc-5392-49fe-9cea-c6685baf27d9" width=300 height=300/>
+    <img src="https://github.com/user-attachments/assets/30cc72bc-5392-49fe-9cea-c6685baf27d9" width=500 height=300/>
 </p>
 
 
