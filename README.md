@@ -101,3 +101,8 @@
       ![schedule](https://github.com/user-attachments/assets/0d8d115c-959b-4021-8cc1-a742f2fa9b86)
       ![edit](https://github.com/user-attachments/assets/6395dd47-a1c6-424e-bb9f-bb9e2394e249)
 
+
+## 빌드가이드
+1) 전제 : gradle 8.12.1이상, mysql 이상
+2) 순서
+    - git clone 
