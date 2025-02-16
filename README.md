@@ -105,7 +105,7 @@
 ## 빌드가이드
  * 백엔드
    - 환경 : gradle 8.12.1이상 , jdk 17, mysql 8이상
-   - 설정파일 : doit/build/resource/applicatoin.yml  데이터베이스 url db명칭 및 패스워드 세팅
+   - 설정파일 : doit/src/main/resources/application.yml  데이터베이스 url db명칭 및 패스워드 세팅
    - 순서
      - git clone https://github.com/Jangdongju1/doit.git (프로젝트 최상위 경로로 이동)
      - gradle build  (jar파일생성)
