@@ -86,14 +86,16 @@
 
 ### - 화면소개
 * 회원가입 및 로그인
-  
-    ![signup](https://github.com/user-attachments/assets/c644f2a8-5002-4405-bc25-6ba6f9f845ef)
-    ![login](https://github.com/user-attachments/assets/eb3360f9-f61d-4280-ba88-11b2d51c6174)
+      ![signup](https://github.com/user-attachments/assets/c644f2a8-5002-4405-bc25-6ba6f9f845ef)
+      ![login](https://github.com/user-attachments/assets/eb3360f9-f61d-4280-ba88-11b2d51c6174)
 
 
 
 
 * 메인화면 일정 등록
+      ![main](https://github.com/user-attachments/assets/3284973d-ee1d-4139-8e75-7d7e702a0b11)
+      ![write](https://github.com/user-attachments/assets/51da171b-5b34-42de-a1f6-bdf7c9b4445a)
+
 
 * 일정확인 
 
