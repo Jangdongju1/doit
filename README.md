@@ -117,5 +117,7 @@
      -  doit/src/main/frontend
      -  npm install
      -  npm start
-## 데이터베이스 백업파일 
+## 데이터베이스 백업파일 & TestID  
+ * 테스트용 아이디 / 비밀번호 : test/test
 
+[dump.zip](https://github.com/user-attachments/files/18815225/dump.zip)
