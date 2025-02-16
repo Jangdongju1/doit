@@ -99,5 +99,5 @@
 
 * 일정 확인 & 수정 & 삭제 
       ![schedule](https://github.com/user-attachments/assets/0d8d115c-959b-4021-8cc1-a742f2fa9b86)
-
+      ![edit](https://github.com/user-attachments/assets/6395dd47-a1c6-424e-bb9f-bb9e2394e249)
 
