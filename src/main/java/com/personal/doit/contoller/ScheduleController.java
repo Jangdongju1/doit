@@ -2,10 +2,9 @@ package com.personal.doit.contoller;
 
 import com.personal.doit.dto.ApiResponse;
 import com.personal.doit.dto.CustomUserDetails;
+import com.personal.doit.dto.request.EditScheduleReq;
 import com.personal.doit.dto.request.ScheduleRegReq;
-import com.personal.doit.dto.response.ScheduleListRsp;
-import com.personal.doit.dto.response.ScheduleRegRsp;
-import com.personal.doit.dto.response.ScheduleRsp;
+import com.personal.doit.dto.response.*;
 import com.personal.doit.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +42,20 @@ public class ScheduleController {
             @RequestParam("sequence") Integer sequence){
 
         return scheduleService.getSchedule(details, sequence);
+    }
+
+    @PatchMapping("")
+    public ResponseEntity<? super ApiResponse<EditScheduleRsp>> editSchedule(
+            @AuthenticationPrincipal CustomUserDetails details,
+            @Validated @RequestBody EditScheduleReq req){
+        return scheduleService.editSchedule(details, req);
+
+    }
+
+    @DeleteMapping
+    public ResponseEntity<? super ApiResponse<DeleteScheduleRsp>> deleteSchedule(
+            @AuthenticationPrincipal CustomUserDetails details,
+            @RequestParam("sequence") Integer sequence){
+        return scheduleService.deleteSchedule(details,sequence);
     }
 }

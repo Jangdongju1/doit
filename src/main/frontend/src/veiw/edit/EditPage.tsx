@@ -7,10 +7,11 @@ import CommonButton from "../../component/button/CommonButton";
 import {useNavigate, useParams} from "react-router-dom";
 import {MAIN_PATH} from "../../constant/path";
 import {useCookies} from "react-cookie";
-import {getSchedule} from "../../api/ScheduleApi";
-import {ScheduleRsp} from "../../dto/rsp";
+import {editScheduleRequest, getSchedule} from "../../api/ScheduleApi";
+import {EditScheduleRsp, ScheduleRsp} from "../../dto/rsp";
 import ResponseDto from "../../dto/ResponseDto";
 import {ResponseCode} from "../../constant/enum/ResponseCode";
+import {EditScheduleReq} from "../../dto/req";
 
 export default function EditPage() {
     // navigate : 네비게이트 함수
@@ -25,21 +26,33 @@ export default function EditPage() {
 
     // state : 제목 상태
     const [title, setTitle] = useState<string>("");
+    // state : 내용
+    const [content , setContent] = useState<string>("");
     // state : 년도 상태
     const [year ,setYear] = useState<number>(0 );
     // state : 달 상태
     const [month, setMonth] = useState<number>(0);
     // state : 일 상태
     const [day, setDay] = useState<number>(0 );
-
     // state : 시작시간
     const [start, setStart] = useState<string>("");
     // state : 끝나는시간
     const [end, setEnd] = useState<string>("");
-    // state : 내용
-    const [content , setContent] = useState<string>("");
 
 
+
+    // function : 스케쥴 수정 요청에 대한 응답처리 함수.
+    const editScheduleResponse =(response : EditScheduleRsp | ResponseDto | null)=>{
+        if (!response) return;
+
+        const {code,message} = response as ResponseDto;
+
+        if (code !== ResponseCode.SUCCESS){
+            alert(message);
+            return;
+        }
+        navigator(MAIN_PATH);
+    }
     // function : 수정할 스케쥴데이터 요청에 대한 응답처리
     const ScheduleResponse = (response: ScheduleRsp | ResponseDto | null) =>{
         if (!response) return;
@@ -74,13 +87,24 @@ export default function EditPage() {
     const onBackBtnClickEventHandler = ()=>{
         navigator(MAIN_PATH);
     }
+    //eventHandler : 수정하기 버튼 클릭시 이벤트 헨들러
+    const onEditBtnClickEventHandler = ()=>{
+        if (!accessToken || !loginUser || !sequence) return;
 
+        if (title.length ===0){
+            alert("제목은 공백일 수 없음");
+            return
+        }
+
+        const requestBody : EditScheduleReq = {sequence : parseInt(sequence,10), title,content,year,month,day,start,end};
+
+        editScheduleRequest(requestBody, accessToken).then(response => editScheduleResponse(response))
+
+    }
     // fetchData;
     useEffect(() => {
         if (!accessToken || !loginUser || !sequence) return;
         getSchedule(sequence, accessToken).then(response => ScheduleResponse(response))
-
-
     }, [sequence]);
 
     return (
@@ -128,6 +152,7 @@ export default function EditPage() {
                 <div className={"edit-page-right-btn-box"}>
                     <CommonButton size={{width: 120, height: 32}}
                                   buttonName={"수정하기"}
+                                  onClick={onEditBtnClickEventHandler}
                                   />
                 </div>
             </div>

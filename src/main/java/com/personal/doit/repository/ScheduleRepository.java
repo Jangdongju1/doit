@@ -13,6 +13,10 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 
 
 
+    boolean existsBySequence(Integer sequence);
+
+    void deleteBySequence(Integer sequence);
+
     Schedule findBySequence(Integer sequence);
 
     @Query(value = "SELECT * FROM schedule WHERE " +

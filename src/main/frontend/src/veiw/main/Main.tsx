@@ -1,12 +1,12 @@
 import "./style.css";
 import useCalender from "../../hook/Calender";
-import {useEffect, useState, MouseEvent, useMemo} from "react";
+import React, {useEffect, useState, MouseEvent, useMemo} from "react";
 import {addMonths, getDay, getMonth, getYear, subMonths} from "date-fns";
 import modalStore from "../../store/ModalStore";
 import Modal from "../modal/modal";
-import {getScheduleList} from "../../api/ScheduleApi";
+import {deleteScheduleRequest, getScheduleList} from "../../api/ScheduleApi";
 import {useCookies} from "react-cookie";
-import {ScheduleListRsp} from "../../dto/rsp";
+import {DeleteScheduleRsp, ScheduleListRsp} from "../../dto/rsp";
 import ResponseDto from "../../dto/ResponseDto";
 import {ResponseCode} from "../../constant/enum/ResponseCode";
 import {Schedule} from "../../dto/Type";
@@ -148,10 +148,12 @@ export default function Main() {
 
     type ScheduleCompProps = {
         scheduleData: Schedule,
+        schedules: Schedule[],
+        setSchedules: React.Dispatch<React.SetStateAction<Schedule[]>>
     }
     // component : 캘린더 스케쥴 컴포넌트
     const CalenderScheduleComp = (props: ScheduleCompProps) => {
-        const {scheduleData} = props;
+        const {scheduleData, schedules, setSchedules} = props;
         // state : schedule 클릭상태
         const [clickScheduleState, setScheduleClickState] = useState<boolean>(false);
 
@@ -161,9 +163,31 @@ export default function Main() {
         // dangerousSetInnerHTMl 에 대한 보안처리
         const sanitizedContent = DOMPurify().sanitize(scheduleData.content)
 
+
+        // function : 스케쥴 삭제에 대한 응답처리함수
+        const deleteScheduleResponse = (response : DeleteScheduleRsp | ResponseDto | null)=>{
+            if (!response) return;
+
+            const {code,message} = response as ResponseDto;
+
+            if (code !== ResponseCode.SUCCESS){
+                alert(message);
+                return;
+            }
+
+            const {data} = response as DeleteScheduleRsp;
+            // 상태 세팅
+            const updateState = schedules.filter(schedule => schedule.sequence != data.deleted )
+            setSchedules(updateState);
+
+            alert("삭제되었습니다.");
+            setScheduleClickState(false);
+
+        }
+
         // 시간값은 조건부로 넣기
-        const getTime= ()=>{
-            if (scheduleData.start.length !== 0  && scheduleData.end) {
+        const getTime = () => {
+            if (scheduleData.start.length !== 0 && scheduleData.end) {
                 return `${scheduleData.start} ~ ${scheduleData.end}`;
             }
 
@@ -186,11 +210,20 @@ export default function Main() {
         }
 
         // eventHandler : 수정버튼 클릭 이벤트 헨들러
-        const onEditBtnClickEventHandler = ()=>{
-            const sequence  = scheduleData.sequence;
+        const onEditBtnClickEventHandler = () => {
+            const sequence = scheduleData.sequence;
 
             if (!sequence) return;
             navigator(EDIT_PATH(String(sequence)));
+        }
+
+        // eventHandler : 삭제버튼 클릭 이벤트 헨들러
+        const onDeleteBtnClickEventHandler = () => {
+            if (!accessToken || !loginUser) return;
+
+
+            deleteScheduleRequest(String(scheduleData.sequence), accessToken)
+                .then(response => deleteScheduleResponse(response));
         }
 
         return (
@@ -201,8 +234,9 @@ export default function Main() {
                 {clickScheduleState && (
                     <div className={"calender-schedule-detail"} onClick={e => onPreventEventBubble(e)}>
                         <div className={"calender-schedule-detail-close-box"}>
-                            <div className={"image calender-schedule-detail-icons edit-icon"} onClick={onEditBtnClickEventHandler}/>
-                            <div className={"image calender-schedule-detail-icons delete-icon"}/>
+                            <div className={"image calender-schedule-detail-icons edit-icon"}
+                                 onClick={onEditBtnClickEventHandler}/>
+                            <div className={"image calender-schedule-detail-icons delete-icon"} onClick={onDeleteBtnClickEventHandler}/>
                             <div className={"image calender-schedule-detail-icons close-icon"}
                                  onClick={onEventDetailCloseBtnClickEventHandler}/>
                         </div>
@@ -210,11 +244,11 @@ export default function Main() {
                         <div className={"calender-schedule-detail-title-box"}>
                             <div className={"calender-schedule-detail-title"}>{scheduleData.title}</div>
                             <div className={"calender-schedule-detail-datetime"}>
-                                {`${scheduleData.year}년 ${scheduleData.month + 1}월${scheduleData.day}일(${weeks[dayValue]}) `+ getTime()}
+                                {`${scheduleData.year}년 ${scheduleData.month + 1}월${scheduleData.day}일(${weeks[dayValue]}) ` + getTime()}
                             </div>
                         </div>
                         <div className={"calender-schedule-detail-content"}
-                             dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
+                             dangerouslySetInnerHTML={{__html: sanitizedContent}}></div>
 
                     </div>)}
 
@@ -233,7 +267,6 @@ export default function Main() {
         const year = String(currentDate.getFullYear());
         const month = String(currentDate.getMonth());
         getScheduleList(year, month, accessToken).then(response => getScheduleListResponse(response));
-        console.log('d')
 
     }, [currentDate]);
 
@@ -275,7 +308,10 @@ export default function Main() {
 
                             <div className={"calender-schedule"}>
                                 {(scheduleMap.get(calenderKeys[index]) || []).map((value, index) => (
-                                    <CalenderScheduleComp key={value.sequence} scheduleData={value}/>
+                                    <CalenderScheduleComp key={value.sequence}
+                                                          scheduleData={value}
+                                                          schedules={schedules}
+                                                          setSchedules={setSchedules}/>
                                 ))}
                             </div>
                         </div>) : null}

@@ -5,10 +5,9 @@ import com.personal.doit.dto.ApiResponse;
 import com.personal.doit.dto.CustomUserDetails;
 import com.personal.doit.dto.ResponseDto;
 import com.personal.doit.dto.custom.ScheduleDto;
+import com.personal.doit.dto.request.EditScheduleReq;
 import com.personal.doit.dto.request.ScheduleRegReq;
-import com.personal.doit.dto.response.ScheduleListRsp;
-import com.personal.doit.dto.response.ScheduleRegRsp;
-import com.personal.doit.dto.response.ScheduleRsp;
+import com.personal.doit.dto.response.*;
 import com.personal.doit.entity.Schedule;
 import com.personal.doit.entity.User;
 import com.personal.doit.repository.ScheduleRepository;
@@ -22,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -195,5 +195,83 @@ public class ScheduleServiceImpl implements ScheduleService {
             return ResponseDto.unexpectedError();
         }
         return ScheduleRsp.success(schedule);
+    }
+
+    @Override
+    public ResponseEntity<? super ApiResponse<EditScheduleRsp>> editSchedule(CustomUserDetails details, EditScheduleReq req) {
+        ScheduleDto edited  = null;
+        try {
+            logger.info(GlobalVariable.LOG_PATTERN, this.getClass().getName(), "userName: " + details.getUsername());
+            Collection<? extends GrantedAuthority> authorities = details.getAuthorities();
+
+            for (GrantedAuthority authority : authorities) {
+                logger.info(GlobalVariable.LOG_PATTERN, this.getClass().getName(), "role: " + authority.getAuthority());
+            }
+
+            User user = userRepository.findByUserId(details.getUsername());
+
+            if (user == null){
+                return EditScheduleRsp.notExistUser();
+            }
+
+            Schedule currentSchedule = scheduleRepository.findBySequence(req.getSequence());
+
+            if (currentSchedule == null) return EditScheduleRsp.notExistSchedule();
+
+            currentSchedule.setTitle(req.getTitle());
+            currentSchedule.setContent(req.getContent());
+            currentSchedule.setStart(req.getStart());
+            currentSchedule.setEnd(req.getEnd());
+
+            scheduleRepository.save(currentSchedule);
+
+            edited = ScheduleDto.builder()
+                    .sequence(req.getSequence())
+                    .title(req.getTitle())
+                    .content(req.getContent())
+                    .year(req.getYear())
+                    .month(req.getMonth())
+                    .day(req.getMonth())
+                    .start(req.getStart())
+                    .end(req.getEnd())
+                    .build();
+
+        }catch (Exception e){
+            logger.error(GlobalVariable.LOG_PATTERN, this.getClass().getName(), Utils.getStackTrace(e));
+            return ResponseDto.unexpectedError();
+        }
+        return EditScheduleRsp.success(edited);
+    }
+
+    @Transactional
+    @Override
+    public ResponseEntity<? super ApiResponse<DeleteScheduleRsp>> deleteSchedule(CustomUserDetails details, Integer sequence) {
+        try {
+            logger.info(GlobalVariable.LOG_PATTERN, this.getClass().getName(), "userName: " + details.getUsername());
+            Collection<? extends GrantedAuthority> authorities = details.getAuthorities();
+
+            for (GrantedAuthority authority : authorities) {
+                logger.info(GlobalVariable.LOG_PATTERN, this.getClass().getName(), "role: " + authority.getAuthority());
+            }
+
+            User user = userRepository.findByUserId(details.getUsername());
+
+            if (user == null){
+                return DeleteScheduleRsp.notExistUser();
+            }
+
+            boolean isExistSchedule  = scheduleRepository.existsById(sequence);
+
+            if (!isExistSchedule) return DeleteScheduleRsp.notExistSchedule();
+
+            // 삭제
+            scheduleRepository.deleteBySequence(sequence);
+
+
+        }catch (Exception e){
+            logger.error(GlobalVariable.LOG_PATTERN, this.getClass().getName(), Utils.getStackTrace(e));
+            return ResponseDto.unexpectedError();
+        }
+        return DeleteScheduleRsp.success(sequence);
     }
 }

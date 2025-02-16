@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "schedule")
@@ -14,8 +15,10 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_sequence")
     private Integer sequence;
+    @Setter
     @Column(name = "schedule_title")
     private String title;
+    @Setter
     @Column(name = "schedule_content")
     private String content;
 
@@ -28,8 +31,10 @@ public class Schedule {
     private Integer month;
     @Column(name = "schedule_day")
     private Integer day;
+    @Setter
     @Column(name = "schedule_start")
     private String start;
+    @Setter
     @Column(name = "schedule_end")
     private String end;
     @Column(name = "schedule_reg_date")

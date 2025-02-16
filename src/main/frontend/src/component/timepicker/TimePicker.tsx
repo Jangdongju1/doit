@@ -56,14 +56,19 @@ export default function TimePicker(props : TimePickerProps) {
     useEffect(() => {
         setStart(startTime)
         setEnd(endTime)
-    }, [startTime, endTime]);
+    }, [startTime,endTime]);
+
 
     useEffect(() => {
+
         if (defaultStart && defaultEnd){
             setStartTime(defaultStart);
             setEndTime(defaultEnd)
         }
-    }, [defaultStart, defaultEnd]);
+    }, [defaultStart,defaultEnd]);
+
+
+
     const PickerOption = (props: OptionProps) => {
         const {options, onClick} = props;
         return (

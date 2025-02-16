@@ -1,9 +1,10 @@
-import {BASE_URL, SCHEDULE, SCHEDULE_LIST, SCHEDULE_REG} from "../constant/ApiEndPoint";
-import {ScheduleRegReq} from "../dto/req";
+import {BASE_URL, DELETE_SCHEDULE, EDIT_SCHEDULE, SCHEDULE, SCHEDULE_LIST, SCHEDULE_REG} from "../constant/ApiEndPoint";
+import {EditScheduleReq, ScheduleRegReq} from "../dto/req";
 import axios from "axios";
 import ResponseDto from "../dto/ResponseDto";
 import ScheduleRegRsp from "../dto/rsp/ScheduleRegRsp";
 import ScheduleListRsp from "../dto/rsp/ScheduleListRsp";
+import {DeleteScheduleRsp, EditScheduleRsp, ScheduleRsp} from "../dto/rsp";
 
 const BASE_INDICATOR = "/api/v1/schedule";
 const REQUEST_URL = (indicator: string) => BASE_URL() + BASE_INDICATOR + indicator;
@@ -63,7 +64,7 @@ export const getSchedule = async (sequence: string, accessToken: string) => {
     try {
         const result = await axios.get(REQUEST_URL(SCHEDULE(sequence)), authorization(accessToken));
 
-        const responseBody : ScheduleRegRsp = result.data;
+        const responseBody: ScheduleRegRsp = result.data;
         return responseBody;
     } catch (err) {
         if (axios.isAxiosError(err)) {
@@ -78,4 +79,53 @@ export const getSchedule = async (sequence: string, accessToken: string) => {
             return null;
         }
     }
+}
+
+// 스케츌 수정 요청
+export const editScheduleRequest = async (requestBody: EditScheduleReq, accessToken: string) => {
+    try {
+        const result =
+            await axios.patch(REQUEST_URL(EDIT_SCHEDULE()), requestBody, authorization(accessToken));
+
+        const responseBody: EditScheduleRsp = result.data;
+
+        return responseBody;
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            if (!err.response) {
+                console.log(err.message)
+                return null;
+            }
+            const response: ResponseDto = err.response.data;
+            return response;
+        } else {
+            console.error(err)
+            return null;
+        }
+    }
+}
+
+// 스케쥴 삭제요청
+
+export const deleteScheduleRequest = async (sequence: string, accessToken: string) => {
+    try {
+        const result =
+            await axios.delete(REQUEST_URL(DELETE_SCHEDULE(sequence)), authorization(accessToken));
+
+        const responseBody: DeleteScheduleRsp = result.data;
+        return responseBody;
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            if (!err.response) {
+                console.log(err.message)
+                return null;
+            }
+            const response: ResponseDto = err.response.data;
+            return response;
+        } else {
+            console.error(err)
+            return null;
+        }
+    }
+
 }

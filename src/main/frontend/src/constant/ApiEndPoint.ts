@@ -12,3 +12,5 @@ export const SIGN_IN = ()=>"/login";
 export const SCHEDULE_REG =  () =>"";
 export const SCHEDULE_LIST = (year:string, month : string)=>`/schedule-list?year=${year}&month=${month}`;
 export const SCHEDULE = (sequence: string) => `?sequence=${sequence}`;
+export const EDIT_SCHEDULE  = ()=>"";
+export const DELETE_SCHEDULE = (sequence : string)=>`?sequence=${sequence}`;

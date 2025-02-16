@@ -43,6 +43,7 @@ const useTimePicker = () => {
         if (startTime) {
             const updatedEndOptions = generateEndOptions(startTime); // startTime 이후의 시간만 필터링
             setEndOptions(updatedEndOptions); // 종료 시간 옵션 설정
+            if (endTime) return;
             if (!endTime || parseInt(endTime.split(':')[0]) <= parseInt(startTime.split(':')[0])) {
                 setEndTime(updatedEndOptions[0]); // 기본적으로 첫 번째 종료 시간을 설정
             }
