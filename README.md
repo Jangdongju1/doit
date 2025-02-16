@@ -84,6 +84,20 @@
   Input이라던가 Button은 어디서나 쓰일 수 있기 때문에 컴포넌트화 해서 사용하였습니다.
 
 
-### 화면소개 
+### - 화면소개
+* 회원가입 및 로그인
+  <div>
+      ![signup](https://github.com/user-attachments/assets/69c4a7e3-1e27-4c11-9f02-aed128751cde)
+      ![login](https://github.com/user-attachments/assets/bdfa0456-0118-45f7-8caf-ec61a08c4519)
+  </div>
+
+
+
+
+
+
+* 메인화면 일정 등록
+
+* 일정확인 
 
 
