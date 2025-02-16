@@ -1,6 +1,6 @@
-import "./sytle.css";
+import "./style.css";
 import {Outlet} from "react-router-dom"
-import ModalStore from "../../store/ModalStore";
+import ModalStore from "../store/ModalStore";
 export default function Container(){
     const {isModalOpen} = ModalStore();
     return (
