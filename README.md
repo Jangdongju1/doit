@@ -52,5 +52,9 @@
     <img src="https://github.com/user-attachments/assets/30cc72bc-5392-49fe-9cea-c6685baf27d9" width=500 height=300/>
 </p>
 
+*프로젝트 소개
+    - 개발기간 : 2025.02.07 ~ 2025.02.16
+    - 개발인원 : 1명 (개인프로젝트)
+
 
 
