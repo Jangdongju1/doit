@@ -102,22 +102,3 @@
       ![edit](https://github.com/user-attachments/assets/6395dd47-a1c6-424e-bb9f-bb9e2394e249)
 
 
-## 빌드가이드
- * 백엔드 (서버 포트 4000) 
-   - 환경 : gradle 8.12.1이상 , jdk 17, mysql 8이상
-   - 설정파일 : doit/src/main/resources/application.yml  데이터베이스 url db명칭 및 패스워드 세팅
-   - 순서
-     - git clone https://github.com/Jangdongju1/doit.git (프로젝트 최상위 경로로 이동)
-     - gradle build  (jar파일생성)
-     - java -jar {jar파일명}.jar
-
-* 프론트엔드(포트 3000)
-   - 환경 : react 18 , nodejs & npm 필수 
-   - 순서
-     -  doit/src/main/frontend
-     -  npm install
-     -  npm start
-## 데이터베이스 백업파일 & TestID  
- * 테스트용 아이디 / 비밀번호 : test/test
-
-[dump.zip](https://github.com/user-attachments/files/18815225/dump.zip)
